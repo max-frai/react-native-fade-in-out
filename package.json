@@ -4,7 +4,7 @@
   "description": "A React Native component that uses a boolean prop to fade children in and out",
   "main": "/index.js",
   "types": "/index.d.ts",
-  "repository": "https://github.com/courtneypattison/react-native-fade-in-out.git",
+  "repository": "https://github.com/max-frai/react-native-fade-in-out.git",
   "bugs": "https://github.com/courtneypattison/react-native-fade-in-out/issues",
   "author": "courtneypattison <courtneyp@ttison.ca> (https://courtneypattison.com/)",
   "license": "MIT",
