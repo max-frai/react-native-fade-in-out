@@ -13,8 +13,6 @@
     "target": "esnext"
   },
   "files": [
-    "setupTests.ts",
-    "src/index.test.tsx",
     "src/index.tsx"
   ]
 }
