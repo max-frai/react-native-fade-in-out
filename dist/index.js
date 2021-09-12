@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Animated } from "react-native";
 const DEFAULT_DURATION = 300;
 const FadeInOut = ({ children, visible, duration = DEFAULT_DURATION, rotate, scale, style, useNativeDriver = true, onAnimationFinished, }) => {
@@ -10,11 +10,11 @@ const FadeInOut = ({ children, visible, duration = DEFAULT_DURATION, rotate, sca
             toValue: visible ? 1 : 0,
             duration: duration,
             useNativeDriver: useNativeDriver,
-        }).start(useCallback(() => {
+        }).start(() => {
             if (onAnimationFinished)
                 onAnimationFinished();
             setAnimationFinished(true);
-        }, []));
+        });
     }, [visible]);
     const transform = [{ perspective: 1000 }];
     if (scale) {

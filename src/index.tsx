@@ -34,12 +34,10 @@ const FadeInOut = ({
             toValue: visible ? 1 : 0,
             duration: duration,
             useNativeDriver: useNativeDriver,
-        }).start(
-            useCallback(() => {
-                if (onAnimationFinished) onAnimationFinished();
-                setAnimationFinished(true);
-            }, [])
-        );
+        }).start(() => {
+            if (onAnimationFinished) onAnimationFinished();
+            setAnimationFinished(true);
+        });
     }, [visible]);
 
     const transform: any[] = [{perspective: 1000}];
