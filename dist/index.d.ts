@@ -7,7 +7,7 @@ export interface FadeInOutProps {
     rotate?: boolean;
     scale?: boolean;
     style?: ViewStyle;
-    onAnimationFinished?: () => void;
+    onAnimationFinished?: (visible: boolean) => void;
     useNativeDriver?: boolean;
 }
 declare const FadeInOut: ({ children, visible, duration, rotate, scale, style, useNativeDriver, onAnimationFinished, }: FadeInOutProps) => JSX.Element;

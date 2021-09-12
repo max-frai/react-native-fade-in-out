@@ -8,7 +8,11 @@ const FadeInOut = ({ children, visible, duration = DEFAULT_DURATION, rotate, sca
             toValue: visible ? 1 : 0,
             duration: duration,
             useNativeDriver: useNativeDriver,
-        }).start(onAnimationFinished);
+        }).start(() => {
+            if (onAnimationFinished) {
+                onAnimationFinished(visible);
+            }
+        });
     }, [visible]);
     const transform = [{ perspective: 1000 }];
     if (scale) {
