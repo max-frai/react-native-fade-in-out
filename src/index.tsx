@@ -11,7 +11,7 @@ export interface FadeInOutProps {
     rotate?: boolean;
     scale?: boolean;
     style?: ViewStyle;
-    onAnimationFinished?: () => void;
+    onAnimationFinished?: (visible: boolean) => void;
     useNativeDriver?: boolean;
 }
 
@@ -32,7 +32,11 @@ const FadeInOut = ({
             toValue: visible ? 1 : 0,
             duration: duration,
             useNativeDriver: useNativeDriver,
-        }).start(onAnimationFinished);
+        }).start(() => {
+            if (onAnimationFinished) {
+                onAnimationFinished(visible);
+            }
+        });
     }, [visible]);
 
     const transform: any[] = [{perspective: 1000}];
