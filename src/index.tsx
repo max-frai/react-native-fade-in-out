@@ -26,18 +26,13 @@ const FadeInOut = ({
     onAnimationFinished,
 }: FadeInOutProps) => {
     const fadeAnim = useRef(new Animated.Value(visible ? 1 : 0)).current;
-    const [animationFinished, setAnimationFinished] = useState(true);
 
     useEffect(() => {
-        setAnimationFinished(false);
         Animated.timing(fadeAnim, {
             toValue: visible ? 1 : 0,
             duration: duration,
             useNativeDriver: useNativeDriver,
-        }).start(() => {
-            if (onAnimationFinished) onAnimationFinished();
-            setAnimationFinished(true);
-        });
+        }).start(onAnimationFinished);
     }, [visible]);
 
     const transform: any[] = [{perspective: 1000}];
@@ -57,7 +52,7 @@ const FadeInOut = ({
 
     return (
         <Animated.View style={{...style, opacity: fadeAnim, transform}}>
-            {animationFinished && visible ? children : null}
+            {children}
         </Animated.View>
     );
 };
