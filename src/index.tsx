@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { ViewStyle } from "react-native";
 import { Animated } from "react-native";
 
@@ -22,15 +22,21 @@ const FadeInOut = ({
   scale,
   style,
   useNativeDriver = true,
+  onAnimationFinished = null
 }: FadeInOutProps) => {
   const fadeAnim = useRef(new Animated.Value(visible ? 1 : 0)).current;
+  const [animationFinished, setAnimationFinished] = useState(true);
 
   useEffect(() => {
+    setAnimationFinished(false);
     Animated.timing(fadeAnim, {
       toValue: visible ? 1 : 0,
       duration: duration,
       useNativeDriver: useNativeDriver,
-    }).start();
+    }).start(useCallback(() => {
+      if (onAnimationFinished) onAnimationFinished();
+      setAnimationFinished(true);
+    }, []));
   }, [visible]);
 
   const transform: any[] = [{ perspective: 1000 }];
@@ -50,7 +56,7 @@ const FadeInOut = ({
 
   return (
     <Animated.View style={{ ...style, opacity: fadeAnim, transform }}>
-      {children}
+      { animationFinished && visible ? children : null }
     </Animated.View>
   );
 };
